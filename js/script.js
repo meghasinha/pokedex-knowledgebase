@@ -72,18 +72,14 @@ var pokemonRepository=(function () {
 
   function loadList()
   {
-    //return $.ajax({apiUrl, dataType: "json"})
-    //  .then(function (response) {
-    //  response.forEach(function (item) {
-    return fetch(apiUrl).then(function (response) {
-    return response.json();
-    }).then(function (json) {
-        json.results.forEach(function (item) {
-          var character = {
+    return $.ajax(apiUrl).then(function (response) {
+      console.log(response);
+    response.results.forEach(function(item){
+        var pokedox = {
           name: item.name,
           detailsUrl: item.url
       };
-      add(character);
+      add(pokedox);
       });
     }).catch(function (e) {
     });
@@ -96,9 +92,6 @@ var pokemonRepository=(function () {
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
-    //return $.ajax(url).then(function (response) {
-      //return response.json();
-    //}).then(function (details) {
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
@@ -127,8 +120,7 @@ var pokemonRepository=(function () {
     $modal.append($imgElement);
     $modalContainer.append($modal);
     $modalContainer.addClass('is-visible');
-
-  }
+    }
 
   /*To remove the modal display */
   function hideModal() {

@@ -73,7 +73,6 @@ var pokemonRepository=(function () {
   function loadList()
   {
     return $.ajax(apiUrl).then(function (response) {
-      console.log(response);
     response.results.forEach(function(item){
         var pokedox = {
           name: item.name,
@@ -89,13 +88,10 @@ var pokemonRepository=(function () {
   function loadDetails(item)
   {
     var url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = Object.keys(details.types);
+    return $.ajax(url).then(function (response) {
+      item.imageUrl = response.sprites.front_default;
+      item.height = response.height;
+      item.types = Object.keys(response.types);
     }).catch(function (e) {
       console.error(e);
     });

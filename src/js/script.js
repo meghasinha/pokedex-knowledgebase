@@ -81,6 +81,7 @@ var pokemonRepository=(function () {
       add(pokedox);
       });
     }).catch(function (e) {
+      console.error(e);
     });
   }
 
@@ -88,7 +89,8 @@ var pokemonRepository=(function () {
   function loadDetails(item)
   {
     var url = item.detailsUrl;
-    return $.ajax(url).then(function (response) {
+      return $.ajax(url).then(function (response) {
+        console.log(response);
       item.imageUrl = response.sprites.front_default;
       item.height = response.height;
       item.types = Object.keys(response.types);
